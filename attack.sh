@@ -3,8 +3,6 @@
 # Set the internal field separator
 IFS=$'\n'
 
-hash_algo="sha-512"
-
 if [ -z "$3" ]
 then
         shadow_file="/etc/shadow"
@@ -22,6 +20,26 @@ if [ $(cat "$shadow_file" | grep "$1:") ]
 then
         echo "Username $1 is good"
         pass_hash=$(cat "$shadow_file" | grep "$1:" | cut -d ":" -f 2)
+        
+        algo_id=$(echo "$pass_hash" | cut -d "$" -f 2)
+        if [ "$algo_id" == "1" ]
+        then
+                hash_algo="md5"
+        fi
+        if [ "$algo_id" == "2a" ] || [ "$algo_id" == "2y" ]
+        then
+                hash_algo="blowfish"
+        fi
+        if [ "$algo_id" == "5" ]
+        then
+                hash_algo="sha-256"
+        fi
+        if [ "$algo_id" == "6" ]
+        then
+                hash_algo="sha-512"
+        fi
+        echo "hashing algorithm: $hash_algo"
+        
         salt=$(echo "$pass_hash" | cut -d "$" -f 3)
         echo "password hash salt: $salt"
 
